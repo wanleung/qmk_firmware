@@ -16,6 +16,17 @@
 
 #include "atreus42.h"
 
+void keyboard_pre_init_kb(void) {
+    led_init_ports();
+    keyboard_pre_init_user();
+}
+
+void led_init_ports(void) {
+    setPinOutput(NUM_LOCK_LED_PIN);
+    setPinOutput(SCROLL_LOCK_LED_PIN);
+    setPinOutput(CAPS_LOCK_LED_PIN);
+}
+
 bool led_update_kb(led_t led_state) {
     if (led_update_user(led_state)) {
         writePin(NUM_LOCK_LED_PIN, !led_state.num_lock);
